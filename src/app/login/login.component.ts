@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       form.value.password
     );
 
-    this._usuarioService.login( usuario, form.value.recuerdame ).subscribe((resp) => this.router.navigate(['/dashboard']));
+    this._usuarioService.login( usuario, form.value.recuerdame ).subscribe((resp) => window.location.href = '/dashboard');
   }
 
 }

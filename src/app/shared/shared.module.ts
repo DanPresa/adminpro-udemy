@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 
 // Components
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { HeaderComponent, SidebarComponent, BreadcrumbComponent, NopagefoundComponent } from './shared.index';
 
 @NgModule({
     declarations: [
         HeaderComponent,
         SidebarComponent,
-        NopagefoundComponent,
-        BreadcrumbComponent
+        BreadcrumbComponent,
+        NopagefoundComponent
     ],
     exports: [
         HeaderComponent,

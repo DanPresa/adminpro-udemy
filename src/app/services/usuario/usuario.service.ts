@@ -14,7 +14,21 @@ export class UsuarioService {
   token: string;
 
   constructor( private http: HttpClient ) {
-    console.log('User service listo');
+    this.cargarStorage();
+  }
+
+  estaLogueado() {
+    return ( localStorage.getItem('token') ) ? true : false;
+  }
+
+  cargarStorage() {
+    if ( localStorage.getItem('token') ) {
+      this.token = localStorage.getItem('token');
+      this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    } else {
+      this.token = '';
+      this.usuario = null;
+    }
   }
 
   guardarStorage( id: string, token: string, usuario: Usuario ) {
@@ -24,6 +38,14 @@ export class UsuarioService {
 
     this.usuario = usuario;
     this.token = token;
+  }
+
+  logOut() {
+    this.usuario = null;
+    this.token = '';
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
   }
 
   loginGoogle( token: string ) {
