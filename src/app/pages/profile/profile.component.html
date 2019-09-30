@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Perfil del usuario</h4>
-                <h6 class="card-subtitle">nombre de usuario</h6>
+                <h6 class="card-subtitle">{{ usuario.nombre }}</h6>
                 <form #f="ngForm" (ngSubmit)="guardar( f.value )" class="form p-t-20">
                     <div class="form-group">
                         <label for="exampleInputuname">Nombre de usuario</label>
@@ -27,12 +27,13 @@
     </div>
     <div class="col-5">
         <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Fotogrfia del usuario</h4>
-                <h6 class="card-subtitle">nombre de usuario</h6>
-                <img src="">
-                <input class="mb-3" type="file">
-                <button type="button" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Actualizar foto</button>
+            <div class="card-body text-center">
+                <h4 class="card-title">Fotografía del usuario</h4>
+                <h6 class="card-subtitle">{{ usuario.nombre }}</h6>
+                <img *ngIf="!imagenTemp" class="mb-3" [src]="usuario.img | imagen" width="150">
+                <img *ngIf="imagenTemp" class="mb-3" [src]="imagenTemp" width="150">
+                <input (change)="seleccionImagen( $event.target.files[0] )" class="mb-3" type="file">
+                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10 btn-block"><i class="fa fa-save"></i> Actualizar foto</button>
             </div>
         </div>
     </div>

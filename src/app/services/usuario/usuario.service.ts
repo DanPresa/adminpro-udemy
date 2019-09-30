@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+// Services
 import { AlertaService } from '../alerta/alerta.service';
+import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 
 import { URL_SERVICIOS } from '../../config/config';
-
 import { Usuario } from '../../models/usuario.model';
 
 @Injectable({
@@ -15,7 +16,11 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor( private _alertaService: AlertaService, private http: HttpClient ) {
+  constructor(
+    private _alertaService: AlertaService,
+    private http: HttpClient,
+    private _subirArchivoService: SubirArchivoService
+  ) {
     this.cargarStorage();
   }
 
@@ -90,5 +95,17 @@ export class UsuarioService {
       this._alertaService.mostrarAlerta('success', 'Usuario actualizado', usuarioDB.nombre, 2000);
       return resp.usuario;
     }));
+  }
+
+  cambiarImagen( archivo: File, id: string ) {
+    this._subirArchivoService.subirArchivo( archivo, 'usuarios', id )
+    .then((resp: any) => {
+      this.usuario.img = resp.usuario.img;
+      this._alertaService.mostrarAlerta('success', 'Imagen de usuario actualizada', this.usuario.nombre, 2000);
+      this.guardarStorage(id, this.token, this.usuario);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 }
