@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 
+// Modules
+import { PipesModule } from '../pipes/pipes.module';
+
 // Components
 import { HeaderComponent, SidebarComponent, BreadcrumbComponent, NopagefoundComponent } from './shared.index';
 
@@ -9,6 +12,9 @@ import { HeaderComponent, SidebarComponent, BreadcrumbComponent, NopagefoundComp
         SidebarComponent,
         BreadcrumbComponent,
         NopagefoundComponent
+    ],
+    imports: [
+        PipesModule
     ],
     exports: [
         HeaderComponent,
