@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // Modules
 import { PipesModule } from '../pipes/pipes.module';
@@ -14,6 +15,7 @@ import { HeaderComponent, SidebarComponent, BreadcrumbComponent, NopagefoundComp
         NopagefoundComponent
     ],
     imports: [
+        RouterModule,
         PipesModule
     ],
     exports: [

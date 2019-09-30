@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+import { AlertaService } from '../alerta/alerta.service';
+
 import { URL_SERVICIOS } from '../../config/config';
 
 import { Usuario } from '../../models/usuario.model';
@@ -13,7 +15,7 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor( private http: HttpClient ) {
+  constructor( private _alertaService: AlertaService, private http: HttpClient ) {
     this.cargarStorage();
   }
 
@@ -76,5 +78,17 @@ export class UsuarioService {
     let url = `${ URL_SERVICIOS }/usuario`;
 
     return this.http.post( url, usuario ).pipe(map((resp: any) => resp.usuario));
+  }
+
+  actualizarUsuario( usuario: Usuario ) {
+    let url = `${ URL_SERVICIOS }/usuario/${ usuario._id }?token=${ this.token }`;
+
+    return this.http.put(url, usuario).pipe(map((resp: any) => {
+      let usuarioDB = resp.usuario;
+      this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+
+      this._alertaService.mostrarAlerta('success', 'Usuario actualizado', usuarioDB.nombre, 2000);
+      return resp.usuario;
+    }));
   }
 }
