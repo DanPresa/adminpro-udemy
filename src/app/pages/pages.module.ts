@@ -6,6 +6,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
 
 // Routes
@@ -22,13 +23,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     DashboardComponent,
     PagesComponent,
     ProfileComponent,
-    UsuariosComponent
+    UsuariosComponent,
   ],
   imports: [
     NgxPaginationModule,
     CommonModule,
     FormsModule,
     PipesModule,
+    ComponentsModule,
     SharedModule,
     RouterModule.forChild( PAGES_ROUTES )
   ]

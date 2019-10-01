@@ -95,11 +95,13 @@ export class UsuarioService {
     let url = `${ URL_SERVICIOS }/usuario/${ usuario._id }?token=${ this.token }`;
 
     return this.http.put(url, usuario).pipe(map((resp: any) => {
-      let usuarioDB = resp.usuario;
-      this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+      if ( usuario._id === this.usuario._id ) {
+        let usuarioDB = resp.usuario;
+        this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+      }
 
-      this._alertaService.mostrarAlerta('success', 'Usuario actualizado', usuarioDB.nombre, 2000);
-      return resp.usuario;
+      this._alertaService.mostrarAlerta('success', resp.mensaje, usuario.nombre, 2000);
+      return resp;
     }));
   }
 

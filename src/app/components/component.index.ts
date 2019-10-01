@@ -1,0 +1,1 @@
+export { ModalUploadComponent } from './modal-upload/modal-upload.component'

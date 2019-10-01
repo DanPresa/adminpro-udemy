@@ -32,26 +32,31 @@
                             <th>
                                 <select [ngModel]="items" #itemsPages class="form-control" (change)="mostrarItems( itemsPages.value )">
                                    <option value="5">5</option> 
-                                   <option value="10">10</option> 
-                                   <option value="15">15</option> 
-                                   <option value="20">20</option> 
-                                   <option value="25">25</option> 
+                                   <option value="10">10</option>
+                                   <option value="15">15</option>
+                                   <option value="20">20</option>
+                                   <option value="25">25</option>
                                 </select>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: items, currentPage: p }">
-                            <td><img class="rounded" [src]="usuario.img | imagen" width="50"></td>
+                            <td><img (click)="mostrarModal( usuario._id )" class="rounded puntero" [src]="usuario.img | imagen" width="50"></td>
                             <td>{{ usuario.email }}</td>
                             <td>{{ usuario.nombre }}</td>
-                            <td>{{ usuario.role }}</td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="usuario.role" name="role">
+                                    <option value="ROLE_ADMIN">ADMIN ROLE</option>
+                                    <option value="ROLE_USER">USER ROLE</option>
+                                </select>
+                            </td>
                             <td>
                                 <label *ngIf="usuario.google" class="label label-danger">Google</label>
                                 <label *ngIf="!usuario.google" class="label label-info">Normal</label>
                             </td>
                             <td>
-                                <button class="btn btn-primary mr-1"><i class="fa fa-save"></i></button>
+                                <button (click)="guardarUsuario( usuario )" class="btn btn-primary mr-1"><i class="fa fa-save"></i></button>
                                 <button (click)="borrarUsuario( usuario )" class="btn btn-danger ml-1"><i class="fa fa-trash-o"></i></button>
                             </td>
                         </tr>

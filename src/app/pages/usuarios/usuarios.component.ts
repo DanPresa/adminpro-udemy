@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { Usuario } from '../../models/usuario.model';
-import { UsuarioService, AlertaService } from '../../services/service.index';
+import { UsuarioService, AlertaService, ModalUploadService } from '../../services/service.index';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,12 +18,19 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private _alertaService: AlertaService,
-    private _usuarioService: UsuarioService
+    private _usuarioService: UsuarioService,
+    public _modalUploadService: ModalUploadService
   ) { }
 
   ngOnInit() {
     this.cargarUsuarios();
     this.items = localStorage.getItem('itempages') || '5';
+
+    this._modalUploadService.notificacion.subscribe((resp) => this.cargarUsuarios());
+  }
+
+  mostrarModal( id: string ) {
+    this._modalUploadService.mostrarModal( 'usuarios', id );
   }
 
   cargarUsuarios() {
@@ -76,5 +83,9 @@ export class UsuariosComponent implements OnInit {
         });
       }
     });
+  }
+
+  guardarUsuario( usuario: Usuario ) {
+    this._usuarioService.actualizarUsuario( usuario ).subscribe();
   }
 }

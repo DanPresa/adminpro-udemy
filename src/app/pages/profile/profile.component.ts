@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   }
 
   seleccionImagen( archivo: File ) {
-    console.log(archivo);
+    // console.log(archivo);
     if ( !archivo ) {
       this.imagenSubir = null;
       return;
@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
 
     reader.onloadend = () => {
       this.imagenTemp = reader.result;
-    }
+    };
   }
 
   cambiarImagen() {
