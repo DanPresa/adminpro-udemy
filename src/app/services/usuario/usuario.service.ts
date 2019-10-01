@@ -133,3 +133,4 @@ export class UsuarioService {
     return this.http.delete( url ).pipe(map((resp: any) => resp.usuario));
   }
 }
+
