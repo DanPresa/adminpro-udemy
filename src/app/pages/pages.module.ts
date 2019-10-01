@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
@@ -14,17 +15,20 @@ import { PAGES_ROUTES } from './pages.routes';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     PagesComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsuariosComponent
   ],
   imports: [
+    NgxPaginationModule,
+    CommonModule,
     FormsModule,
     PipesModule,
-    CommonModule,
     SharedModule,
     RouterModule.forChild( PAGES_ROUTES )
   ]

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // Modules
@@ -16,6 +17,7 @@ import { HeaderComponent, SidebarComponent, BreadcrumbComponent, NopagefoundComp
     ],
     imports: [
         RouterModule,
+        CommonModule,
         PipesModule
     ],
     exports: [

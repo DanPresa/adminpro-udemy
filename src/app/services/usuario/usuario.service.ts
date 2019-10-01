@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 // Services
 import { AlertaService } from '../alerta/alerta.service';
@@ -17,8 +19,9 @@ export class UsuarioService {
   token: string;
 
   constructor(
-    private _alertaService: AlertaService,
+    private router: Router,
     private http: HttpClient,
+    private _alertaService: AlertaService,
     private _subirArchivoService: SubirArchivoService
   ) {
     this.cargarStorage();
@@ -53,6 +56,9 @@ export class UsuarioService {
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('itempages');
+
+    this.router.navigate(['/login']);
   }
 
   loginGoogle( token: string ) {
@@ -107,5 +113,23 @@ export class UsuarioService {
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  cargarUsuarios() {
+    let url = `${ URL_SERVICIOS }/usuario`;
+
+    return this.http.get( url ).pipe(map((resp: any) => resp));
+  }
+
+  buscarUsuarios( termino: string ) {
+    let url = `${ URL_SERVICIOS }/busqueda/coleccion/usuarios/${ termino }`;
+
+    return this.http.get( url ).pipe(map((resp: any) => resp.usuarios));
+  }
+
+  borrarUsuario( id: string ) {
+    let url = `${ URL_SERVICIOS }/usuario/${ id }?token=${ this.token }`;
+
+    return this.http.delete( url ).pipe(map((resp: any) => resp.usuario));
   }
 }

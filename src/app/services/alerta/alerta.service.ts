@@ -15,4 +15,5 @@ export class AlertaService {
       timer: tiempo
     });
   }
+
 }

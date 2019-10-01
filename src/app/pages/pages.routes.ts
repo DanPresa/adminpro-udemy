@@ -4,6 +4,7 @@ import { LoginGuard } from '../services/service.index';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -13,6 +14,8 @@ export const PAGES_ROUTES: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'perfil', component: ProfileComponent },
+            // Mantenimientos
+            { path: 'usuarios', component: UsuariosComponent },
             { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
         ]
     }
