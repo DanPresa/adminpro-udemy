@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import { LoginGuard, SidebarService, UsuarioService, SubirArchivoService, AlertaService, ModalUploadService } from './service.index';
+import { LoginGuard, SidebarService, UsuarioService, HospitalesService, SubirArchivoService, AlertaService, ModalUploadService } from './service.index';
 
 @NgModule({
     imports: [
@@ -10,6 +10,7 @@ import { LoginGuard, SidebarService, UsuarioService, SubirArchivoService, Alerta
     providers: [
         LoginGuard,
         SidebarService,
+        HospitalesService,
         UsuarioService,
         SubirArchivoService,
         AlertaService,

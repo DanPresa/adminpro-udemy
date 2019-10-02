@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import Swal from 'sweetalert2';
 
 // Services
 import { AlertaService } from '../alerta/alerta.service';
@@ -95,6 +94,7 @@ export class UsuarioService {
     let url = `${ URL_SERVICIOS }/usuario/${ usuario._id }?token=${ this.token }`;
 
     return this.http.put(url, usuario).pipe(map((resp: any) => {
+
       if ( usuario._id === this.usuario._id ) {
         let usuarioDB = resp.usuario;
         this.guardarStorage(usuarioDB._id, this.token, usuarioDB);

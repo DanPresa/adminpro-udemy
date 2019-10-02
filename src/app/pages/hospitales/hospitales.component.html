@@ -1,1 +1,61 @@
-<p>hospitales works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #termino class="form-control" placeholder="Buscar por..." type="text" (keyup)="buscarHospital(termino.value)">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="cargando">
+    <div class="col-12 text-center">
+        <div class="alert alert-warning">
+            <div><strong>Cargando</strong></div>
+            <div><i class="fa fa-refresh fa-spin fa-2x"></i></div>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button (click)="crearHospital()" class="btn btn-primary"><i class="fa fa-plus"></i> Crear hospital</button>
+                </div>
+                <h3 class="card-title">Hospitales registrados ( <small>{{ totalRegistros }}</small> )</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>
+                                <select [ngModel]="items" #itemsPages class="form-control" (change)="mostrarItems( itemsPages.value )">
+                                   <option value="5">5</option> 
+                                   <option value="10">10</option>
+                                   <option value="15">15</option>
+                                   <option value="20">20</option>
+                                   <option value="25">25</option>
+                                </select>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitales | paginate: { itemsPerPage: items, currentPage: p }">
+                            <!-- (click)="mostrarModal( hospital._id )" -->
+                            <td><img class="rounded puntero" [src]="hospital.img | imagen: 'hospital'" width="50"></td>
+                            <td>
+                                <input [(ngModel)]="hospital.nombre" class="form-control" type="text">
+                            </td>
+                            <td>
+                                <button (click)="guardarHospital( hospital )" class="btn btn-primary mr-1"><i class="fa fa-save"></i></button>
+                                <button (click)="borrarHospital( hospital )" class="btn btn-danger ml-1"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
