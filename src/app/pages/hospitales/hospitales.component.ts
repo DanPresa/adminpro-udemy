@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
-import { AlertaService, HospitalesService } from '../../services/service.index';
+import { AlertaService, HospitalesService, ModalUploadService } from '../../services/service.index';
 import { Hospital } from 'src/app/models/hospital.model';
 
 @Component({
@@ -17,16 +17,26 @@ export class HospitalesComponent implements OnInit {
   p: number = 1;
   items: string = '5';
 
-  constructor( private _alertaService: AlertaService, private _hospitalesService: HospitalesService ) { }
+  constructor(
+    private _alertaService: AlertaService,
+    private _modalUploadService: ModalUploadService,
+    private _hospitalesService: HospitalesService,
+  ) { }
 
   ngOnInit() {
     this.cargarHospitales();
     this.items = localStorage.getItem('itempages') || '5';
+
+    this._modalUploadService.notificacion.subscribe((resp) => this.cargarHospitales());
   }
 
   mostrarItems( itemsPerPages: string ) {
     this.items = itemsPerPages;
     localStorage.setItem('itempages', itemsPerPages);
+  }
+
+  mostrarModal( hospital: Hospital ) {
+    this._modalUploadService.mostrarModal( 'hospitales', hospital._id );
   }
 
   cargarHospitales() {
@@ -76,7 +86,7 @@ export class HospitalesComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'S, borrar!',
+      confirmButtonText: 'Si, borrar!',
       cancelButtonText: 'No, cancelar!'
     }).then((result) => {
       if (result.value) {

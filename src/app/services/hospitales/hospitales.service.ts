@@ -19,9 +19,7 @@ export class HospitalesService {
   buscarHospital( termino: string ) {
     let url = `${ URL_SERVICIOS }/busqueda/coleccion/hospitales/${ termino }`;
 
-    return this.http.get( url ).pipe(map((resp: any) => {
-      return resp;
-    }));
+    return this.http.get( url ).pipe(map((resp: any) => resp));
   }
 
   cargarHospitales() {

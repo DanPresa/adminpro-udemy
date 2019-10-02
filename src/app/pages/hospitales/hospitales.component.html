@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
-                    <button (click)="crearHospital()" class="btn btn-primary"><i class="fa fa-plus"></i> Crear hospital</button>
+                    <button (click)="crearHospital()" class="btn waves-effect waves-light btn-rounded btn-primary"><i class="fa fa-plus"></i> Crear hospital</button>
                 </div>
                 <h3 class="card-title">Hospitales registrados ( <small>{{ totalRegistros }}</small> )</h3>
                 <table class="table table-hover">
@@ -43,7 +43,7 @@
                     <tbody>
                         <tr *ngFor="let hospital of hospitales | paginate: { itemsPerPage: items, currentPage: p }">
                             <!-- (click)="mostrarModal( hospital._id )" -->
-                            <td><img class="rounded puntero" [src]="hospital.img | imagen: 'hospital'" width="50"></td>
+                            <td><img (click)="mostrarModal( hospital )" class="rounded puntero" [src]="hospital.img | imagen: 'hospital'" width="50"></td>
                             <td>
                                 <input [(ngModel)]="hospital.nombre" class="form-control" type="text">
                             </td>

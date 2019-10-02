@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Usuario } from '../../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class ModalUploadService {
   notificacion = new EventEmitter<any>();
 
   constructor() {
-    console.log('Modal upload service listo');
+    // console.log('Modal upload service listo');
   }
 
   ocultarModal() {
