@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     PagesComponent,
     ProfileComponent,
     UsuariosComponent,
+    HospitalesComponent,
   ],
   imports: [
     NgxPaginationModule,

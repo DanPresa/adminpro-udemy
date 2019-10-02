@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -16,6 +17,7 @@ export const PAGES_ROUTES: Routes = [
             { path: 'perfil', component: ProfileComponent },
             // Mantenimientos
             { path: 'usuarios', component: UsuariosComponent },
+            { path: 'hospitales', component: HospitalesComponent },
             { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
         ]
     }
