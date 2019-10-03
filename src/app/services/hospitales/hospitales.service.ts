@@ -42,6 +42,14 @@ export class HospitalesService {
     }
   }
 
+  obtenerHospital( id: string ) {
+    let url = `${ URL_SERVICIOS }/hospital/${ id }`;
+
+    return this.http.get( url ).pipe(map((resp: any) => {
+      return resp.hospital;
+    }));
+  }
+
   borrarHospital( hospital: Hospital ) {
     let url = `${ URL_SERVICIOS }/hospital/${ hospital._id }?token=${ this.token }`;
 

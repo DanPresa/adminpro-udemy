@@ -18,6 +18,8 @@ import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { HospitalesComponent } from './hospitales/hospitales.component';
     ProfileComponent,
     UsuariosComponent,
     HospitalesComponent,
+    MedicosComponent,
+    MedicoComponent,
   ],
   imports: [
     NgxPaginationModule,

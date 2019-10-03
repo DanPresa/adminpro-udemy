@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { Usuario } from '../models/usuario.model';
@@ -19,7 +18,6 @@ export class LoginComponent implements OnInit {
   auth2: any;
 
   constructor(
-    private router: Router,
     private _usuarioService: UsuarioService,
     private _alertaService: AlertaService
   ) { }

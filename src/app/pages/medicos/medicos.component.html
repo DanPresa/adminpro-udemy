@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #termino class="form-control" placeholder="Buscar por..." type="text" (keyup)="buscarMedico(termino.value)">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="cargando">
+    <div class="col-12 text-center">
+        <div class="alert alert-warning">
+            <div><strong>Cargando</strong></div>
+            <div><i class="fa fa-refresh fa-spin fa-2x"></i></div>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button [routerLink]="['/medico', 'nuevo']" class="btn waves-effect waves-light btn-rounded btn-primary"><i class="fa fa-plus"></i> Crear médico</button>
+                </div>
+                <h3 class="card-title">Médicos registrados ( <small>{{ totalRegistros }}</small> )</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Médico</th>
+                            <th>Hospital</th>
+                            <th>
+                                <select [ngModel]="items" #itemsPages class="form-control" (change)="mostrarItems( itemsPages.value )">
+                                   <option value="5">5</option> 
+                                   <option value="10">10</option>
+                                   <option value="15">15</option>
+                                   <option value="20">20</option>
+                                   <option value="25">25</option>
+                                </select>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos | paginate: { itemsPerPage: items, currentPage: p }">
+                            <!-- (click)="mostrarModal( hospital._id )" -->
+                            <td><img class="rounded puntero" [src]="medico.img | imagen: 'medico'" width="50"></td>
+                            <td>{{ medico.nombre }}</td>
+                            <td>{{ medico.hospital.nombre }}</td>
+                            <td>
+                                <button [routerLink]="['/medico', medico._id]" class="btn btn-primary mr-1"><i class="fa fa-edit"></i></button>
+                                <button (click)="borrarMedico( medico )" class="btn btn-danger ml-1"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

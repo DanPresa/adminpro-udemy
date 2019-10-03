@@ -7,6 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -19,6 +21,8 @@ export const PAGES_ROUTES: Routes = [
             // Mantenimientos
             { path: 'usuarios', component: UsuariosComponent },
             { path: 'hospitales', component: HospitalesComponent },
+            { path: 'medicos', component: MedicosComponent },
+            { path: 'medico/:id', component: MedicoComponent },
             { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
         ]
     }
